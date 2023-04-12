@@ -1,0 +1,53 @@
+{% include 'navbar.html' %}
+
+{% load static %}
+<section class="vh-100">
+    <div class="container-fluid h-custom">
+      <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class="col-md-9 col-lg-6 col-xl-5">
+          <img style="width: 400; height: 550;" src="{% static 'img/signup.jpg' %}"
+            class="img-fluid" alt="Sample image">
+        </div>
+        <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
+            <h5>Register</h5>
+          <form>  
+            <!-- Fullname input -->
+            <div class="form-outline mb-4">
+                <input type="text" id="form3Example3" class="form-control form-control-lg"
+                  placeholder="Enter your full name" />
+                <label class="form-label" for="form3Example3">Full name</label>
+              </div>
+            <!-- Email input -->
+            <div class="form-outline mb-4">
+                <input type="text" id="form3Example3" class="form-control form-control-lg"
+                  placeholder="Enter your address" />
+                <label class="form-label" for="form3Example3">Address</label>
+              </div>
+            <!-- Email input -->
+            <div class="form-outline mb-4">
+              <input type="email" id="form3Example3" class="form-control form-control-lg"
+                placeholder="Enter a valid email address" />
+              <label class="form-label" for="form3Example3">Email address</label>
+            </div>
+  
+            <!-- Password input -->
+            <div class="form-outline mb-3">
+              <input type="password" id="form3Example4" class="form-control form-control-lg"
+                placeholder="Enter password" />
+              <label class="form-label" for="form3Example4">Password</label>
+            </div>
+  
+  
+            <div class="text-center text-lg-start mt-4 pt-2">
+              <button type="button" class="btn btn-primary btn-lg"
+                style="padding-left: 2.5rem; padding-right: 2.5rem;">Register</button>
+              <p class="small fw-bold mt-2 pt-1 mb-0">Already have an account?<a href="{% url 'login' %}"
+                  class="link-success">Login</a></p>
+            </div>
+  
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+{% include 'footer.html' %}
