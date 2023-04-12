@@ -4,8 +4,8 @@ from django.views import View
 
 # Create your views here.
 class WelcomePage(View):
-    def get(self,request):
-        return render(request,'welcome.html')
+    def get(self,request): 
+        return render(request,'index.html')
     
 class Homepage(View):
     def get(self,request):
