@@ -11,10 +11,3 @@ class Homepage(View):
     def get(self,request):
         return render (request,'homepage.html')
 
-class Login(View):
-    def get(self,request):
-        return render (request,'login.html')
-
-class Register(View):
-    def get(self,request):
-        return render (request,'register.html')

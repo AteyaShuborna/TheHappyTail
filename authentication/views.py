@@ -1,19 +1,12 @@
 # Create your views here.
-from django.urls import reverse_lazy
-from django.views.generic.edit import CreateView
+from django.shortcuts import render,redirect
 from django.contrib import messages
-from authentication.forms import UserRegistrationForm
 from django.contrib.auth.models import User, auth
 from django.contrib.auth import authenticate
-from django.contrib.auth import login as auth_login
-from django.contrib.auth import logout as auth_logout
+from django.contrib.auth import login
+from django.contrib.auth import logout
 from .models import CustomUser
-from django.shortcuts import render
 
-# class SignUpView(CreateView):
-#     form_class = UserRegistrationForm
-#     template_name = 'signup.html'
-#     success_url = reverse_lazy('homepage')
 
 def register(request):
     if request.method == 'POST':
@@ -21,12 +14,41 @@ def register(request):
         email = request.POST['email']
         password = request.POST['password']
         address = request.POST['address']
-        user = User.objects.create_user(email, email, password)
-        customUser = CustomUser(name, address)
-        customUser.user = user
+
+        if CustomUser.objects.filter(email=email).exists():
+            messages.info(request, 'email already exists!')
+            return redirect('register.html')
+        else:
+            user = CustomUser(name=name, address=address, email=email)
+            user.save()
+            user = User.objects.create_user(email, email, password)
+            user.save()
+        
         return render(request, 'index.html')
     else:
         return render(request,'register.html')
-
     
-   
+
+def login_user(request):
+    if request.method == "POST":
+        email = request.POST.get('email')
+        password = request.POST.get('password')
+        print(email,password)
+        user = authenticate(request, username=email, password=password)
+        if user is not None:
+            print('success')
+            login(request, user)
+            return render(request, 'index.html')
+        else:
+            messages.info(request, 'invalid email or password')
+            print('failed')
+            return render(request, 'login.html')
+        
+    else:
+        return render(request, 'login.html')
+    
+
+def logout_user(request):
+    logout(request)
+    print('logout success')
+    return redirect('index.html')
