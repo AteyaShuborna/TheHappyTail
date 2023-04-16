@@ -1,9 +1,7 @@
 # Create your models here.
 from django.db import models
 from django.contrib.auth.models import User
-from django.core.exceptions import ValidationError
-from phonenumbers import PhoneNumber
-from authentication.models import CustomUser
+from customuser.models import CustomUser
 
 
 class Pet(models.Model):
@@ -27,8 +25,7 @@ class Pet(models.Model):
     pet_mobile = models.CharField(max_length=20)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    pet_age = models.IntegerField(null=True, blank=True)
-
+    pet_age = models.IntegerField(null=True, default=None)
 
     class Meta:
         abstract = True

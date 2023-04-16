@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from .models import AdoptionPet, MissingPet
 from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
-from authentication.models import CustomUser
+from customuser.models import CustomUser
 
 
 @login_required
@@ -60,14 +60,14 @@ def view_pet_adoption(request):
 def update_pet_adoption(request,pk):
     adoptionpet = get_object_or_404(AdoptionPet, pk=pk)
     if adoptionpet.user_id != request.user.username:
-        return redirect('pet_adoption_view.html')
+        return redirect('pet_detail')
 
     if request.method == 'POST':
         adoptionpet.pet_name = request.POST['pet_name']
         adoptionpet.pet_age = request.POST['pet_age']
         adoptionpet.save()
 
-        return render('adoption_pet_detail.html')
+        return redirect('pet_detail')
     
     creator_name = adoptionpet.user.name
 
@@ -75,6 +75,25 @@ def update_pet_adoption(request,pk):
     
     
     return render(request, 'update_pet_adoption.html', context)
+
+@login_required
+def delete_pet(request, type, pk):
+    pet_type = {'adoption': AdoptionPet, 'missing': MissingPet}.get(type, None)
+    if pet_type is None:
+        return render(request, '404.html', status=404)
+    
+    adoption_pet = get_object_or_404(pet_type, pk=pk)
+
+    if adoption_pet.user_id != request.user.username:
+        return redirect('view_pet_adoption')
+
+    if request.method == 'POST':
+        adoption_pet.delete()
+        return redirect('view_pet_adoption')
+
+    # Render the confirmation page
+    context = {'adoption_pet': adoption_pet}
+    return render(request, 'delete_pet.html', context)
 
 def pet_detail(request,type,pk):
     pet_type = {'adoption': AdoptionPet, 'missing': MissingPet}.get(type, None)

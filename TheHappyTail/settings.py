@@ -42,8 +42,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'base.apps.BaseConfig',
     'authentication.apps.AuthenticationConfig',
-    'pet',
-    'crispy_forms',
+    'pet.apps.PetConfig',
+    'customuser.apps.CustomuserConfig',
 ]
 
 MIDDLEWARE = [

@@ -21,4 +21,5 @@ urlpatterns = [
     path('',include('base.urls')),
     path('register/',include('authentication.urls')),
     path('pet/',include('pet.urls')),
+    path('user/',include('customuser.urls')),
 ]
