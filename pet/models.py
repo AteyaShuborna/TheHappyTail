@@ -7,7 +7,7 @@ from authentication.models import CustomUser
 
 
 class Pet(models.Model):
-    user = models.OneToOneField(CustomUser, on_delete=models.CASCADE, null=True, default=None)
+    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE, null=True, default=None)
     PET_TYPE_CHOICES = [
         ('cat', 'Cat'),
         ('dog', 'Dog'),
@@ -20,13 +20,14 @@ class Pet(models.Model):
     pet_breed = models.CharField(max_length=255, null=True, blank=True)
     pet_description = models.TextField(blank=True)
     pet_image = models.ImageField(upload_to='static/img/pet', null=True, blank=True)
-    pet_vaccinated = models.BooleanField(default=False)
+    pet_vaccinated = models.BooleanField(null=True, blank=True)
     pet_colour = models.CharField(max_length=20, null=True, blank=True)
     pet_gender = models.CharField(max_length=20)
     pet_location = models.CharField(max_length=255) 
     pet_mobile = models.CharField(max_length=20)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+    pet_age = models.IntegerField(null=True, blank=True)
 
 
     class Meta:

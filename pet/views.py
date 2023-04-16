@@ -1,7 +1,6 @@
-from django.shortcuts import render, redirect
-from .models import AdoptionPet
+from django.shortcuts import render, redirect, get_object_or_404
+from .models import AdoptionPet, MissingPet
 from django.http import HttpResponse
-from django.core.exceptions import ValidationError
 from django.contrib.auth.decorators import login_required
 from authentication.models import CustomUser
 
@@ -23,6 +22,7 @@ def create_pet_adoption(request):
         pet_physicalcondition = request.POST['pet_physicalcondition']
         pet_availability = request.POST['pet_availability']
         pet_vaccinated = request.POST['pet_vaccinated']
+        pet_age = request.POST['pet_age']
         email = request.user.username
         creator = CustomUser.objects.get(email=email)
 
@@ -41,6 +41,7 @@ def create_pet_adoption(request):
             pet_physicalcondition=pet_physicalcondition,
             pet_availability=pet_availability,
             pet_vaccinated=pet_vaccinated,
+            pet_age=pet_age,
             user=creator
             )
         
@@ -54,5 +55,38 @@ def create_pet_adoption(request):
 def view_pet_adoption(request):
     pets = AdoptionPet.objects.filter(pet_availability=True)
     return render(request, 'pet_adoption_view.html', {'pets': pets})
+
+@login_required
+def update_pet_adoption(request,pk):
+    adoptionpet = get_object_or_404(AdoptionPet, pk=pk)
+    if adoptionpet.user_id != request.user.username:
+        return redirect('pet_adoption_view.html')
+
+    if request.method == 'POST':
+        adoptionpet.pet_name = request.POST['pet_name']
+        adoptionpet.pet_age = request.POST['pet_age']
+        adoptionpet.save()
+
+        return render('adoption_pet_detail.html')
+    
+    creator_name = adoptionpet.user.name
+
+    context = {'pet': adoptionpet, 'creator_name': creator_name}
+    
+    
+    return render(request, 'update_pet_adoption.html', context)
+
+def pet_detail(request,type,pk):
+    pet_type = {'adoption': AdoptionPet, 'missing': MissingPet}.get(type, None)
+    if pet_type is None:
+        return render(request, '404.html', status=404)
+    
+    pet = get_object_or_404(pet_type, pk=pk)
+    creator_name = pet.user.name
+
+    context = {'pet': pet, 'creator_name': creator_name}
+    return render(request, 'pet_detail.html', context)
+
+
 
 

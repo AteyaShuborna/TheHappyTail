@@ -45,18 +45,29 @@
             <label for="pet_description">Pet Description</label>
             <textarea class="form-control" id="pet_description" name="pet_description" rows="3" placeholder="Enter pet description"></textarea>
         </div>
+        <!-- Pet Age -->
+        <div class="form-group">
+            <label for="pet_age">Age</label>
+            <input type="number" class="form-control" id="pet_age" name="pet_age" placeholder="Age">
+        </div>
         <!-- Pet Colour -->
         <div class="form-group">
             <label for="pet_colour">Colour</label>
             <input type="text" class="form-control" id="pet_colour" name="pet_colour" placeholder="Colour">
         </div>
         <!-- Pet Vaccinated -->
-        <div class="form-group">
-            <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="False" id="pet_vaccinated" name="pet_vaccinated">
-                <label class="form-check-label" for="pet_vaccinated">Pet Vaccinated</label>
-            </div>
-        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="radio" name="pet_vaccinated" id="pet_vaccinated_true" value="1" checked>
+            <label class="form-check-label" for="pet_vaccinated_true">
+              Vaccinated
+            </label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="pet_vaccinated" id="pet_vaccinated_false" value="0">
+            <label class="form-check-label" for="pet_vaccinated_false">
+              Not Vaccinated
+            </label>
+          </div>
         <!-- Physical Condition -->
         <div class="form-group">
             <label for="pet_physicalcondition">Physical Condition</label>
