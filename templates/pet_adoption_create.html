@@ -15,6 +15,7 @@
     <h1>Pet Adoption Form</h1>
     <form method="POST" action="">
         {% csrf_token %}
+        <!-- Pet type -->
         <div class="form-group">
             <label for="pet_type">Pet Type</label>
             <select class="form-control" id="pet_type" name="pet_type">
@@ -24,26 +25,81 @@
                 <option value="other">Other</option>
             </select>
         </div>
+        <!-- Pet name -->
         <div class="form-group">
             <label for="pet_name">Pet Name</label>
-            <input type="text" class="form-control" id="pet_name" name="pet_name" placeholder="Enter pet name">
+            <input type="text" class="form-control" id="pet_name" name="pet_name" placeholder="Enter pet name" required>
         </div>
+        <!-- Pet breed -->
         <div class="form-group">
             <label for="pet_breed">Pet Breed</label>
             <input type="text" class="form-control" id="pet_breed" name="pet_breed" placeholder="Enter pet breed">
         </div>
+        <!-- Pet image -->
         <div class="form-group">
           <label for="pet_image">Pet Image</label>
           <input type="file" class="form-control-file" id="pet_image" name="pet_image">
       </div>
+      <!-- Pet description -->
         <div class="form-group">
             <label for="pet_description">Pet Description</label>
             <textarea class="form-control" id="pet_description" name="pet_description" rows="3" placeholder="Enter pet description"></textarea>
         </div>
+        <!-- Pet Colour -->
         <div class="form-group">
-            <label for="adoption_fee">Adoption Fee</label>
-            <input type="text" class="form-control" id="adoption_fee" name="adoption_fee" placeholder="Enter adoption fee">
+            <label for="pet_colour">Colour</label>
+            <input type="text" class="form-control" id="pet_colour" name="pet_colour" placeholder="Colour">
         </div>
+        <!-- Pet Vaccinated -->
+        <div class="form-group">
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="False" id="pet_vaccinated" name="pet_vaccinated">
+                <label class="form-check-label" for="pet_vaccinated">Pet Vaccinated</label>
+            </div>
+        </div>
+        <!-- Physical Condition -->
+        <div class="form-group">
+            <label for="pet_physicalcondition">Physical Condition</label>
+            <input type="text" class="form-control" id="pet_physicalcondition" name="pet_physicalcondition">
+        </div>
+        <!-- Pet Location -->
+        <div class="form-group">
+            <label for="pet_location">Pet Location</label>
+            <input type="text" class="form-control" id="pet_location" name="pet_location" required>
+        </div>
+        <!-- Pet Behaviour -->
+        <div class="form-group">
+            <label for="pet_behaviour">Pet Behaviour</label>
+            <textarea class="form-control" id="pet_behaviour" name="pet_behaviour" rows="3"></textarea>
+        </div>
+        <!-- Pet Food -->
+        <div class="form-group">
+            <label for="pet_food">Pet Food</label>
+            <input type="text" class="form-control" id="pet_food" name="pet_food">
+        </div>
+        <!-- Pet Availability -->
+        <div class="form-group form-check">
+            <input type="checkbox" class="form-check-input" value="True" id="pet_availability" name="pet_availability" required>
+            <label class="form-check-label" for="pet_availability">Pet Available for Adoption?</label>
+        </div>
+        <!-- mobile -->
+        <div class="form-group">
+            <label for="pet_mobile">Mobile Number:</label>
+            <input type="tel" class="form-control" id="pet_mobile" name="pet_mobile" pattern="01[3-9][0-9]{8}" required>
+            <small class="form-text text-muted">Please enter your mobile number in the format: xxx-xxx-xxxx</small>
+          </div>
+          <!-- pet gender -->
+          <div class="form-group">
+            <label for="pet_gender">Gender</label>
+            <select class="form-control" id="pet_gender" name="pet_gender">
+              <option value="male">Male</option>
+              <option value="female">Female</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+
+
+
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>
 </div>

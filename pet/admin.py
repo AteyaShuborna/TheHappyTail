@@ -1,8 +1,8 @@
 from django.contrib import admin
-from .models import Adoption,MissingPet
+from .models import AdoptionPet,MissingPet
 # Register your models here.
 
-admin.site.register(Adoption)
+admin.site.register(AdoptionPet)
 class AdoptionAdmin(admin.ModelAdmin):
     list_display = ('pet_name', 'pet_type', 'pet_breed', 'adoption_fee')
 
