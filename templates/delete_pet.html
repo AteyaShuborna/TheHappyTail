@@ -10,12 +10,12 @@
 </head>
 <body>
 <div class="container mt-4">
-  <h2>Delete Adoption Pet</h2>
-  <p>Are you sure you want to delete the adoption pet "{{ adoption_pet.pet_name }}"?</p>
-  <form method="POST" action="{% url 'pet:delete_pet' pk=adoption_pet.pk %}">
+  <h2>Delete Pet</h2>
+  <p>Are you sure you want to delete the post "{{ pet.pet_name }}"?</p>
+  <form method="POST" >
     {% csrf_token %}
     <button type="submit" class="btn btn-danger">Delete</button>
-    <a href="{% url 'pet:pet_detail' pk=adoption_pet.pk %}" class="btn btn-secondary">Cancel</a>
+    <a href="{{ url_go_to }}" class="btn btn-secondary">Cancel</a>
   </form>
 </div>
 </body>

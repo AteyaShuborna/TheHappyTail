@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Form</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+</head>
+<body>
+  <div class="container">
+    <h1>Pet Adoption Form</h1>
+    <form method="POST" action="">
+        {% csrf_token %}
+        <!-- Pet type -->
+        <div class="form-group">
+            <label for="pet_type">Pet Type</label>
+            <select class="form-control" id="pet_type" name="pet_type">
+                <option value="cat">Cat</option>
+                <option value="dog">Dog</option>
+                <option value="bird">Bird</option>
+                <option value="other">Other</option>
+            </select>
+        </div>
+        <!-- Pet name -->
+        <div class="form-group">
+            <label for="pet_name">Pet Name</label>
+            <input type="text" class="form-control" id="pet_name" name="pet_name" placeholder="Enter pet name" required>
+        </div>
+        <!-- Pet breed -->
+        <div class="form-group">
+            <label for="pet_breed">Pet Breed</label>
+            <input type="text" class="form-control" id="pet_breed" name="pet_breed" placeholder="Enter pet breed">
+        </div>
+        <!-- Pet description -->
+        <div class="form-group">
+            <label for="pet_description">Pet Description</label>
+            <textarea class="form-control" id="pet_description" name="pet_description" rows="3" placeholder="Enter pet description"></textarea>
+        </div>
+        <!-- Pet image -->
+        <div class="form-group">
+            <label for="pet_image">Pet Image</label>
+            <input type="file" class="form-control-file" id="pet_image" name="pet_image">
+        </div>
+        <!-- Pet Colour -->
+        <div class="form-group">
+            <label for="pet_colour">Colour</label>
+            <input type="text" class="form-control" id="pet_colour" name="pet_colour" placeholder="Colour">
+        </div>
+        <!-- pet gender -->
+        <div class="form-group">
+            <label for="pet_gender">Gender</label>
+            <select class="form-control" id="pet_gender" name="pet_gender">
+              <option value="male">Male</option>
+              <option value="female">Female</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+         <!-- Pet Location -->
+         <div class="form-group">
+            <label for="pet_location">Pet Location</label>
+            <input type="text" class="form-control" id="pet_location" name="pet_location" required>
+        </div>
+        <!-- mobile -->
+        <div class="form-group">
+            <label for="pet_mobile">Mobile Number:</label>
+            <input type="tel" class="form-control" id="pet_mobile" name="pet_mobile" pattern="01[3-9][0-9]{8}" required>
+            <small class="form-text text-muted">Please enter your mobile number in the format: xxx-xxx-xxxx</small>
+          </div>
+        <!-- accessories -->
+        <div class="form-group">
+        <label for="pet_accessories">Pet Accessories:</label>
+        <input type="text" class="form-control" id="pet_accessories" name="pet_accessories">
+        </div>
+        <div class="form-group">
+        <!-- date missing -->
+        <label for="pet_datemissing">Pet Date Missing:</label>
+        <input type="date" class="form-control" id="pet_datemissing" name="pet_datemissing">
+        </div>
+         <!-- Pet Vaccinated -->
+         <div class="form-check">
+            <input class="form-check-input" type="radio" name="pet_vaccinated" id="pet_vaccinated_true" value="1" checked>
+            <label class="form-check-label" for="pet_vaccinated_true">
+              Vaccinated
+            </label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="pet_vaccinated" id="pet_vaccinated_false" value="0">
+            <label class="form-check-label" for="pet_vaccinated_false">
+              Not Vaccinated
+            </label>
+          </div>
+        <!-- rewards -->
+        <div class="form-group">
+        <label for="pet_rewards">Rewards:</label>
+        <input type="text" class="form-control" id="pet_rewards" name="pet_rewards">
+        </div>
+        <!-- Pet last seen -->
+        <div class="form-group">
+        <label for="pet_last_seen_location">Pet Last Seen Location:</label>
+        <input type="text" class="form-control" id="pet_last_seen_location" name="pet_last_seen_location">
+        </div>
+        <!-- Pet Age -->
+        <div class="form-group">
+            <label for="pet_age">Age</label>
+            <input type="number" class="form-control" id="pet_age" name="pet_age" placeholder="Age">
+        </div>
+        
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+    </div>      
+  </div>
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
+</body>
+</html>

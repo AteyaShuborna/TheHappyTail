@@ -25,7 +25,7 @@ class Pet(models.Model):
     pet_mobile = models.CharField(max_length=20)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    pet_age = models.IntegerField(null=True, default=None)
+    pet_age = models.IntegerField(null=True, default=0)
 
     class Meta:
         abstract = True
@@ -42,7 +42,11 @@ class AdoptionPet(Pet):
 
 
 class MissingPet(Pet):
-    last_seen_location = models.CharField(max_length=255)
+    pet_last_seen_location = models.CharField(max_length=255)
+    pet_datemissing = models.DateField(null=True,blank=True)
+    pet_accessories = models.CharField(max_length=255 , null=True , blank= True)
+    pet_rewards = models.CharField(max_length=255, null=True , blank=True)
+    pet_still_missing = models.BooleanField(default=True)
 
     def __str__(self):
         return f"{self.pet_name} ({self.pet_type}) - Last seen at {self.last_seen_location}"

@@ -1,7 +1,7 @@
 from django.urls import path
-from .views import user_adoption_post
+from .views import user_adoption_post,user_missing_post
 
 urlpatterns = [
     path('my-adoption-post/', user_adoption_post, name='my_adoption_post'),
-    #path('pet/<int:pk>/', pet_detail, name='pet_detail'),
+    path('my-missing-post/', user_missing_post, name='my_missing_post'),
 ]
