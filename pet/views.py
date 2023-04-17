@@ -78,31 +78,26 @@ def update_pet_adoption(request,pk):
 
 @login_required
 def delete_pet(request, type, pk):
+
     url_type=type
     pet_type = {'adoption': AdoptionPet, 'missing': MissingPet}.get(type, None)
     if pet_type is None:
         return render(request, '404.html', status=404)
     
-    pet = get_object_or_404(pet_type, pk=pk)
-
-    if url_type =='adoption':
+    if url_type=='adoption':
         url= reverse('my_adoption_post')
-        if pet.user_id != request.user.username:
-            return redirect('my_adoption_post')
-
-        if request.method == 'POST':
-            pet.delete()
-            return redirect('my_adoption_post')
-        
     elif url_type =='missing':
         url= reverse('my_missing_post')
-        if pet.user_id != request.user.username:
-            return redirect('my_missing_post')
 
-        if request.method == 'POST':
-            pet.delete()
-            return redirect('my_missing_post')
+    pet = get_object_or_404(pet_type, pk=pk)
 
+    if pet.user_id != request.user.username:
+        return redirect(url)
+
+    if request.method == 'POST':
+        pet.delete()
+        return redirect(url)
+        
     context = {'pet': pet ,'url_go_to':url}
     return render(request, 'delete_pet.html', context)
 
