@@ -1,19 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>My Form</title>
-  <!-- Bootstrap CSS -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
-</head>
+  {% include 'navbar.html' %}
+  {% load static %}
+  <link href="{% static 'css/custom.css' %}" rel="stylesheet">
 <body>
+<br/>
   <div class="container">
-    <h1>Pet Adoption Form</h1>
-    <form method="POST" action="">
+    <h3 class="text-center">Pet Missing Form</h3> <br/>
+    <form class="adoption" method="POST" action="">
         {% csrf_token %}
         <!-- Pet type -->
-        <div class="form-group">
+        <div class="row">
+        <!-- Pet name -->
+        <div class="col">
+          <label for="pet_name">Pet Name</label>
+          <input type="text" class="form-control" id="pet_name" name="pet_name" placeholder="Enter pet name" required>
+        </div>
+        <div class="col">
             <label for="pet_type">Pet Type</label>
             <select class="form-control" id="pet_type" name="pet_type">
                 <option value="cat">Cat</option>
@@ -22,33 +25,34 @@
                 <option value="other">Other</option>
             </select>
         </div>
-        <!-- Pet name -->
-        <div class="form-group">
-            <label for="pet_name">Pet Name</label>
-            <input type="text" class="form-control" id="pet_name" name="pet_name" placeholder="Enter pet name" required>
-        </div>
+      </div>
+      <div class="row">
         <!-- Pet breed -->
-        <div class="form-group">
+        <div class="col">
             <label for="pet_breed">Pet Breed</label>
             <input type="text" class="form-control" id="pet_breed" name="pet_breed" placeholder="Enter pet breed">
         </div>
         <!-- Pet description -->
-        <div class="form-group">
+        <div class="col">
             <label for="pet_description">Pet Description</label>
-            <textarea class="form-control" id="pet_description" name="pet_description" rows="3" placeholder="Enter pet description"></textarea>
+            <textarea class="form-control" id="pet_description" name="pet_description" rows="1" placeholder="Enter pet description"></textarea>
         </div>
+      </div>
+      <div class="row">
         <!-- Pet image -->
-        <div class="form-group">
-            <label for="pet_image">Pet Image</label>
+        <div class="col">
+            <label for="pet_image">Pet Image</label><br/>
             <input type="file" class="form-control-file" id="pet_image" name="pet_image">
         </div>
         <!-- Pet Colour -->
-        <div class="form-group">
+        <div class="col">
             <label for="pet_colour">Colour</label>
             <input type="text" class="form-control" id="pet_colour" name="pet_colour" placeholder="Colour">
         </div>
+      </div>
+      <div class="row">
         <!-- pet gender -->
-        <div class="form-group">
+        <div class="col">
             <label for="pet_gender">Gender</label>
             <select class="form-control" id="pet_gender" name="pet_gender">
               <option value="male">Male</option>
@@ -57,60 +61,68 @@
             </select>
           </div>
          <!-- Pet Location -->
-         <div class="form-group">
+         <div class="col">
             <label for="pet_location">Pet Location</label>
-            <input type="text" class="form-control" id="pet_location" name="pet_location" required>
+            <input type="text" class="form-control" id="pet_location" name="pet_location" placeholder="Enter your location" required>
         </div>
+      </div>
+      <div class="row">
         <!-- mobile -->
-        <div class="form-group">
+        <div class="col">
             <label for="pet_mobile">Mobile Number:</label>
-            <input type="tel" class="form-control" id="pet_mobile" name="pet_mobile" pattern="01[3-9][0-9]{8}" required>
-            <small class="form-text text-muted">Please enter your mobile number in the format: xxx-xxx-xxxx</small>
+            <input type="tel" class="form-control" id="pet_mobile" name="pet_mobile" pattern="01[3-9][0-9]{8}" placeholder="Please enter your mobile number in the format: xxx-xxx-xxxx" required>
           </div>
         <!-- accessories -->
-        <div class="form-group">
+        <div class="col">
         <label for="pet_accessories">Pet Accessories:</label>
-        <input type="text" class="form-control" id="pet_accessories" name="pet_accessories">
+        <input type="text" class="form-control" id="pet_accessories" placeholder="Enter pet accessories if any" name="pet_accessories">
         </div>
-        <div class="form-group">
+      </div>
+      <div class="row">
+        <div class="col">
         <!-- date missing -->
-        <label for="pet_datemissing">Pet Date Missing:</label>
-        <input type="date" class="form-control" id="pet_datemissing" name="pet_datemissing">
+          <label for="pet_datemissing">Pet Date Missing:</label>
+          <input type="date" class="form-control" id="pet_datemissing" placeholder="Enter missing date" name="pet_datemissing">
         </div>
+        <!-- rewards -->
+        <div class="col">
+          <label for="pet_rewards">Rewards:</label>
+          <input type="text" class="form-control" id="pet_rewards" placeholder="Enter rewards if any" name="pet_rewards">
+        </div>
+      </div>
+      <div class="row">
          <!-- Pet Vaccinated -->
-         <div class="form-check">
+         <div class="col">
             <input class="form-check-input" type="radio" name="pet_vaccinated" id="pet_vaccinated_true" value="1" checked>
             <label class="form-check-label" for="pet_vaccinated_true">
               Vaccinated
             </label>
           </div>
-          <div class="form-check">
+          <div class="col">
             <input class="form-check-input" type="radio" name="pet_vaccinated" id="pet_vaccinated_false" value="0">
             <label class="form-check-label" for="pet_vaccinated_false">
               Not Vaccinated
             </label>
           </div>
-        <!-- rewards -->
-        <div class="form-group">
-        <label for="pet_rewards">Rewards:</label>
-        <input type="text" class="form-control" id="pet_rewards" name="pet_rewards">
         </div>
+        <div class="row">
         <!-- Pet last seen -->
-        <div class="form-group">
+        <div class="col">
         <label for="pet_last_seen_location">Pet Last Seen Location:</label>
-        <input type="text" class="form-control" id="pet_last_seen_location" name="pet_last_seen_location">
+        <input type="text" class="form-control" id="pet_last_seen_location" placeholder="Enter last seen location" name="pet_last_seen_location">
         </div>
         <!-- Pet Age -->
-        <div class="form-group">
+        <div class="col">
             <label for="pet_age">Age</label>
             <input type="number" class="form-control" id="pet_age" name="pet_age" placeholder="Age">
         </div>
-        
-        <button type="submit" class="btn btn-primary">Submit</button>
-    </form>
-    </div>      
-  </div>
-  <!-- Bootstrap JS -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
+        </div>
+        <div class="d-grid gap-2 col-4 mx-auto text-center">
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+      </form>
+    <br/><br/><br/>
+</div>
 </body>
+{% include 'footer.html' %}
 </html>
