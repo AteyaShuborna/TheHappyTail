@@ -7,9 +7,9 @@
     <h2>My Missing posts</h2>
     <ul>
       {% for pet in user_all_missing_post %}
-        <li><a href="{% url 'pet_detail' type='=missing' pk=pet.pk %}">{{ pet.pet_name }}</a></li>
-        <li><a href="{% url 'update_pet_missing' pk=pet.pk %}">update</a></li>
-        <li><a href="{% url 'delete_pet' type='missing' pk=pet.pk %}">Delete</a></li>
+        <li><a href="{% url 'pet_detail' type='missing' pk=pet.pk %}">{{ pet.pet_name }}</a></li>
+        <li><a href="{% url 'update_missing_post' pk=pet.pk %}">update</a></li>
+        <li><a href="{% url 'delete_post' type='missing' pk=pet.pk %}">Delete</a></li>
 
       {% empty %}
         <li>You haven't posted anything yet.</li>

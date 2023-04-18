@@ -8,8 +8,8 @@
     <ul>
       {% for pet in user_all_adoption_post %}
         <li><a href="{% url 'pet_detail' type='adoption' pk=pet.pk %}">{{ pet.pet_name }}</a></li>
-        <li><a href="{% url 'update_pet_adoption' pk=pet.pk %}">update</a></li>
-        <li><a href="{% url 'delete_pet' type='adoption' pk=pet.pk %}">Delete</a></li>
+        <li><a href="{% url 'update_adoption_post' pk=pet.pk %}">update</a></li>
+        <li><a href="{% url 'delete_post' type='adoption' pk=pet.pk %}">Delete</a></li>
 
       {% empty %}
         <li>You haven't posted anything yet.</li>

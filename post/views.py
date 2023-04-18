@@ -1,13 +1,13 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse
-from .models import AdoptionPet, MissingPet
+from .models import AdoptionPost, MissingPost
 from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
 from customuser.models import CustomUser
 
 
 @login_required
-def create_pet_adoption(request):
+def create_adoption_post(request):
     if request.method == 'POST':
         pet_type = request.POST['pet_type']
         pet_name = request.POST['pet_name']
@@ -27,7 +27,7 @@ def create_pet_adoption(request):
         email = request.user.username
         creator = CustomUser.objects.get(email=email)
 
-        pet_for_adoption= AdoptionPet(
+        pet_for_adoption= AdoptionPost(
             pet_type=pet_type,
             pet_name=pet_name,
             pet_breed=pet_breed,
@@ -50,16 +50,16 @@ def create_pet_adoption(request):
         
         return HttpResponse("Successfully posted!")
     else:
-        return render(request, 'pet_adoption_create.html')
+        return render(request, 'create_adoption_post.html')
     
 
-def view_pet_adoption(request):
-    pets = AdoptionPet.objects.filter(pet_availability=True)
-    return render(request, 'pet_adoption_view.html', {'pets': pets})
+def view_all_adoption_post(request):
+    pets = AdoptionPost.objects.filter(pet_availability=True)
+    return render(request, 'view_all_adoption_post.html', {'pets': pets})
 
 @login_required
-def update_pet_adoption(request,pk):
-    adoptionpet = get_object_or_404(AdoptionPet, pk=pk)
+def update_adoption_post(request,pk):
+    adoptionpet = get_object_or_404(AdoptionPost, pk=pk)
     if adoptionpet.user_id != request.user.username:
         return redirect('my_adoption_post')
 
@@ -74,13 +74,13 @@ def update_pet_adoption(request,pk):
 
     context = {'pet': adoptionpet, 'creator_name': creator_name}
       
-    return render(request, 'update_pet_adoption.html', context)
+    return render(request, 'update_adoption_post.html', context)
 
 @login_required
-def delete_pet(request, type, pk):
+def delete_post(request, type, pk):
 
     url_type=type
-    pet_type = {'adoption': AdoptionPet, 'missing': MissingPet}.get(type, None)
+    pet_type = {'adoption': AdoptionPost, 'missing': MissingPost}.get(type, None)
     if pet_type is None:
         return render(request, '404.html', status=404)
     
@@ -99,10 +99,10 @@ def delete_pet(request, type, pk):
         return redirect(url)
         
     context = {'pet': pet ,'url_go_to':url}
-    return render(request, 'delete_pet.html', context)
+    return render(request, 'delete_post.html', context)
 
 def pet_detail(request,type,pk):
-    pet_type = {'adoption': AdoptionPet, 'missing': MissingPet}.get(type, None)
+    pet_type = {'adoption': AdoptionPost, 'missing': MissingPost}.get(type, None)
     if pet_type is None:
         return render(request, '404.html', status=404)
     
@@ -115,7 +115,7 @@ def pet_detail(request,type,pk):
 
 #===================================== pet missing ===============================================================#
 @login_required
-def create_pet_missing(request):
+def create_missing_post(request):
     if request.method == 'POST':
         pet_type = request.POST['pet_type']
         pet_name = request.POST['pet_name']
@@ -135,7 +135,7 @@ def create_pet_missing(request):
         email = request.user.username
         creator = CustomUser.objects.get(email=email)
 
-        pet_for_adoption= MissingPet(
+        pet_missing= MissingPost(
             pet_type=pet_type,
             pet_name=pet_name,
             pet_breed=pet_breed,
@@ -155,16 +155,16 @@ def create_pet_missing(request):
             user=creator
             )
         
-        pet_for_adoption.save()
+        pet_missing.save()
         
         return HttpResponse("Successfully posted!")
     else:
-        return render(request, 'pet_missing_create.html')
+        return render(request, 'create_missing_post.html')
     
 
 @login_required
-def update_pet_missing(request,pk):
-    missingpet = get_object_or_404(MissingPet, pk=pk)
+def update_missing_post(request,pk):
+    missingpet = get_object_or_404(MissingPost, pk=pk)
     if missingpet.user_id != request.user.username:
         return redirect('my_missing_post')
 
@@ -179,11 +179,11 @@ def update_pet_missing(request,pk):
 
     context = {'pet': missingpet, 'creator_name': creator_name}
       
-    return render(request, 'update_pet_missing.html', context)
+    return render(request, 'update_missing_post.html', context)
 
-def view_pet_missing(request):
-    pets = MissingPet.objects.filter(pet_still_missing= True)
-    return render(request, 'pet_missing_view.html', {'pets': pets})
+def view_all_missing_post(request):
+    pets = MissingPost.objects.filter(pet_still_missing= True)
+    return render(request, 'view_all_missing_post.html', {'pets': pets})
 
 
 

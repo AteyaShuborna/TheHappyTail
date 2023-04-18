@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 from customuser.models import CustomUser
 
 
-class Pet(models.Model):
+class Post(models.Model):
     user = models.ForeignKey(CustomUser, on_delete=models.CASCADE, null=True, default=None)
     PET_TYPE_CHOICES = [
         ('cat', 'Cat'),
@@ -31,7 +31,7 @@ class Pet(models.Model):
         abstract = True
 
 
-class AdoptionPet(Pet):
+class AdoptionPost(Post):
     pet_food = models.CharField(max_length=255, null=True, blank=True)
     pet_behaviour = models.CharField(max_length=255, null=True, blank=True)
     pet_physicalcondition = models.CharField(max_length=255, null=True, blank=True)
@@ -41,7 +41,7 @@ class AdoptionPet(Pet):
         return f"{self.pet_name} ({self.pet_type})"
 
 
-class MissingPet(Pet):
+class MissingPost(Post):
     pet_last_seen_location = models.CharField(max_length=255)
     pet_datemissing = models.DateField(null=True,blank=True)
     pet_accessories = models.CharField(max_length=255 , null=True , blank= True)
