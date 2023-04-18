@@ -47,8 +47,7 @@ def create_adoption_post(request):
             )
         
         pet_for_adoption.save()
-        
-        return HttpResponse("Successfully posted!")
+        return redirect(f"/post/adoption/{pet_for_adoption.id}/")
     else:
         return render(request, 'create_adoption_post.html')
     
@@ -68,7 +67,7 @@ def update_adoption_post(request,pk):
         adoptionpet.pet_age = request.POST['pet_age']
         adoptionpet.save()
 
-        return redirect('my_adoption_post')
+        return redirect(f"/post/adoption/{adoptionpet.id}/")
     
     creator_name = adoptionpet.user.name
 
