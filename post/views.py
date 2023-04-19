@@ -54,7 +54,8 @@ def create_adoption_post(request):
 
 def view_all_adoption_post(request):
     pets = AdoptionPost.objects.filter(pet_availability=True)
-    return render(request, 'view_all_adoption_post.html', {'pets': pets})
+    context={'pets':pets,'user':request.user}
+    return render(request, 'view_all_adoption_post.html', context)
 
 @login_required
 def update_adoption_post(request,pk):

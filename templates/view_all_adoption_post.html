@@ -10,7 +10,11 @@
 		<ul>
 		{% for pet in pets %}
 			<li>{{ pet.pet_name }} - {{ pet.pet_breed }}</li>
-			<li><a href="{% url 'make_adoption_request' pk=pet.pk %}">Adopt me</a></li>
+			{% if user.is_authenticated %}
+				<li><a href="{% url 'make_adoption_request' pk=pet.pk %}">Adopt me</a></li>
+			{% else %}
+				<li><a href="{% url 'login' %}">Adopt me</a></li>
+			{% endif %}
 		{% endfor %}
 		</ul>
 	{% else %}

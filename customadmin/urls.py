@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import admin_login,admin_dashboard,view_all_adoption_request,approve_adoption_request
+from .views import admin_login,admin_dashboard,view_all_adoption_request,approve_adoption_request,logout_admin
 
 urlpatterns = [
 
@@ -7,4 +7,5 @@ urlpatterns = [
     path('dashboard/', admin_dashboard, name='admin_dashboard'),
     path('all-adoption-request/', view_all_adoption_request, name='all_adoption_request'),
     path('approve-adoption-request', approve_adoption_request, name='approve_adoption_request'),
+    path('admin-logout', logout_admin, name='admin_logout'),
 ]

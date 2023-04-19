@@ -2,10 +2,10 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
 from django.http import HttpResponseRedirect,HttpResponse
 from django.contrib import messages
-from django.contrib.auth import authenticate,login
+from django.contrib.auth import authenticate,login,logout
 from django.contrib.admin.views.decorators import staff_member_required
 from django.urls import reverse_lazy
-from post.models import AdoptionRequest,Missinginfo
+from post.models import AdoptionRequest,Missinginfo,AdoptionPost
 
 
 # Create your views here.
@@ -34,6 +34,11 @@ def admin_login(request):
     
     except Exception:
         return redirect('index')
+    
+def logout_admin(request):
+    logout(request)
+    print('logout success')
+    return redirect('admin_login')
 
 
 @staff_member_required(login_url = reverse_lazy('admin_login'))
@@ -44,7 +49,12 @@ def admin_dashboard(request):
 @staff_member_required(login_url = reverse_lazy('admin_login'))
 def view_all_adoption_request(request):
     all_requests = AdoptionRequest.objects.filter(approved=False)
-    return render(request, 'view_all_adoption_request.html', {'requests': all_requests})
+    
+    for req in all_requests:
+        pet_name = AdoptionPost.objects.get(id=req.pet_id).pet_name
+        req.pet_name = pet_name
+    context = {'requests': all_requests}
+    return render(request, 'view_all_adoption_request.html', context)
 
 @staff_member_required(login_url = reverse_lazy('admin_login'))
 def approve_adoption_request(request,pk):
