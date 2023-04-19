@@ -1,12 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>{{ pet.pet_name }} - Pet Detail</title>
-</head>
+{% include 'navbar.html' %}
+{% load static %}
 <body>
-  <h1>{{ pet.pet_name }}</h1>
-  <p>Age: {{ pet.pet_age }}</p>
-  <p>Owner: {{creator_name}}</p>
+  <body>
+    <br/>
+    <div class="container">
+        <h3 class="text-center">Pet Details</h3> <br/>
+            {% csrf_token %}
+            <div class="container">
+              <div class="row">
+                <div class="col">
+                  <img style="width: 400px; height: 400px;" src="/{{ pet.pet_image }}" />
+                </div>
+                <div class="col">
+                    <label style="margin-bottom: 1rem;">Pet Name: {{pet.pet_name}}</label><br/>
+                    <label style="margin-bottom: 1rem;">Pet Type : {{pet.pet_type}}</label><br/>
+                    <label style="margin-bottom: 1rem;">Creator Name : {{creator_name}}</label><br/>
+                    <label style="margin-bottom: 1rem;">Pet Type : {{pet.pet_type}}</label><br/>
+                    <a href="{% url 'make_adoption_request' pk=pet.pk %}"><button class="btn btn-primary">Request for adoption</button></a>
+                </div>
+              </div>
+            </div>
+    </div>
+  <br><br><br><br>
 </body>
+{% include 'footer.html' %}
 </html>
