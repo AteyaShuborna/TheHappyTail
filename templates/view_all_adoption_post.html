@@ -14,7 +14,7 @@
 					{% for pet in pets %}
 					<div class="pb-5">
 						<div class="product-item position-relative bg-light d-flex flex-column text-center">
-							<img class="img-fluid mb-4" src="{% static 'img/blog-1.jpg' %}" alt="">
+							<img class="img-fluid mb-4" src="/{{  pet.pet_image }}" alt="">
 							<h6 class="text-uppercase">{{ pet.pet_name }} - {{ pet.pet_breed }}</h6>
 							<h5 class="text-primary mb-0">Adopt Me</h5>
 							<div class="btn-action d-flex justify-content-center">

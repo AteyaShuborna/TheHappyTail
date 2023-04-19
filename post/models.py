@@ -26,7 +26,6 @@ class Post(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     pet_age = models.IntegerField(null=True, default=0)
-
     class Meta:
         abstract = True
 
