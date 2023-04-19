@@ -50,4 +50,22 @@ class MissingPost(Post):
 
     def __str__(self):
         return f"{self.pet_name} ({self.pet_type}) - Last seen at {self.last_seen_location}"
+    
+
+class AdoptionRequest(models.Model):
+    posted_by = models.CharField(max_length=20 , default=None)
+    requested_by = models.ForeignKey(CustomUser, on_delete=models.CASCADE, null=True, default=None)
+    pet = models.ForeignKey(AdoptionPost, on_delete=models.CASCADE, null=True, default=None)
+    reason = models.TextField(blank=True)
+    mobile  = models.CharField(max_length=20)
+    email = models.CharField(max_length=20)
+    had_pet = models.BooleanField(default=False, null=True, blank=True)
+    can_pick_up = models.BooleanField(null=True, blank=True, default=False)
+    approved= models.BooleanField(default=False)
+
+    def __str__(self):
+        return f"{self.requested_by} ({self.pet}) - posted by {self.posted_by}"
+    
+class Missinginfo(models.Model):
+    pass
 

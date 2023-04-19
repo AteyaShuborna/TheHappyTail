@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import create_adoption_post,update_adoption_post,view_all_adoption_post,create_missing_post,update_missing_post,view_all_missing_post,delete_post,pet_detail
+from .views import create_adoption_post,update_adoption_post,view_all_adoption_post,create_missing_post,update_missing_post,view_all_missing_post,delete_post,pet_detail,make_adoption_request
 
 urlpatterns = [
     path('create-adoption-post/', create_adoption_post , name='create_adoption_post'),
@@ -10,4 +10,5 @@ urlpatterns = [
     path('view-all-missing-post/', view_all_missing_post, name='view_all_missing_post'),
     path('<str:type>/<int:pk>/', pet_detail, name='pet_detail'),
     path('<str:type>/<int:pk>/delete-post/', delete_post, name='delete_post'),
+    path('<int:pk>/request-pet-adoption/', make_adoption_request, name='make_adoption_request'),
 ]

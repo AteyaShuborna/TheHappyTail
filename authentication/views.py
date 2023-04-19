@@ -23,7 +23,7 @@ def register(request):
             user = User.objects.create_user(email, email, password)
             user.save()
         
-        return render(request, 'index.html')
+        return render(request, 'login.html')
     else:
         return render(request,'register.html')
     
@@ -32,15 +32,12 @@ def login_user(request):
     if request.method == "POST":
         email = request.POST.get('email')
         password = request.POST.get('password')
-        print(email,password)
         user = authenticate(request, username=email, password=password)
         if user is not None:
-            print('success')
             login(request, user)
             return render(request, 'index.html')
         else:
             messages.info(request, 'invalid email or password')
-            print('failed')
             return render(request, 'login.html')
         
     else:
@@ -50,4 +47,4 @@ def login_user(request):
 def logout_user(request):
     logout(request)
     print('logout success')
-    return redirect('index.html')
+    return redirect('index')

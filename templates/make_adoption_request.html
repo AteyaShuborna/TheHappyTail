@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+{% include 'navbar.html' %}
+{% load static %}
+<link href="{% static 'css/custom.css' %}" rel="stylesheet">
+<body>
+<br/>
+<div class="container">
+    <h3 class="text-center">Pet Adoption Request Form</h3> <br/>
+    <form method="POST" action="">
+        {% csrf_token %}
+            <!-- Pet name -->
+            <div class="row">
+                <label for="pet_name">PET NAME: {{pet.pet_name}}</label>
+            </div>
+            <!-- Pet name -->
+            <div class="row">
+                <label for="pet_type">PET type : {{pet.pet_type}}</label>
+            </div>
+            <br/><br/><br/>
+            <!-- reason -->
+            <div class="row">
+                <label for="reason">Why you want to adopt?</label>
+                <textarea class="form-control" id="reason" name="reason" ></textarea>
+            </div>
+
+        <div class="row">
+        <!-- mobile -->
+         <div class="col">
+            <label for="mobile">Mobile Number:</label>
+            <input type="tel" class="form-control" id="mobile" name="mobile" pattern="01[3-9][0-9]{8}" placeholder="Please enter your mobile number in the format: xxx-xxx-xxxx" required>
+        </div>
+
+        <!-- email -->
+        <div class="col">
+            <label for="requester_email">Email Address</label>
+            <input type="text" class="form-control" id="requester_email" name="requester_email" >
+        </div>
+      </div>
+
+      <div class="row">
+        <!-- had pet -->
+        <label for="had_pet">Had per before?</label>
+        <div class="row">
+            <input class="form-check-input position-static" type="checkbox" name="had_pet" id="had_pet_true" value="1">
+            <label class="form-check-label" for="had_pet_true">yes
+            </label>
+          </div> 
+          <div class="row">
+            <input class="form-check-input position-static" type="checkbox" name="had_pet" id="had_pet_false" value="0">
+            <label class="form-check-label" for="had_pet_false">no
+            </label>
+          </div> 
+        <!-- can pick up -->
+        <label for="can_pick_up">Can you pick up?</label>
+        <div class="row">
+            <input class="form-check-input position-static" type="checkbox" name="can_pick_up" id="can_pick_up_true" value="1">
+            <label class="form-check-label" for="can_pick_up_true">yes
+            </label>
+          </div>
+
+          <div class="row">
+            <input class="form-check-input position-static" type="checkbox" name="can_pick_up" id="can_pick_up_false" value="0">
+            <label class="form-check-label" for="can_pick_up_false">no
+            </label>
+          </div>
+        </div>
+
+        
+        
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+  </div>
+  <br><br><br><br>
+</body>
+{% include 'footer.html' %}
+</html>
+

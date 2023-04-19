@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'authentication.apps.AuthenticationConfig',
     'post.apps.PostConfig',
     'customuser.apps.CustomuserConfig',
+    'customadmin.apps.CustomadminConfig',
 ]
 
 MIDDLEWARE = [

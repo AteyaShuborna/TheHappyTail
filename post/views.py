@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse
-from .models import AdoptionPost, MissingPost
+from .models import AdoptionPost, MissingPost ,AdoptionRequest
 from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
 from customuser.models import CustomUser
@@ -79,8 +79,8 @@ def update_adoption_post(request,pk):
 def delete_post(request, type, pk):
 
     url_type=type
-    pet_type = {'adoption': AdoptionPost, 'missing': MissingPost}.get(type, None)
-    if pet_type is None:
+    post_type = {'adoption': AdoptionPost, 'missing': MissingPost}.get(type, None)
+    if post_type is None:
         return render(request, '404.html', status=404)
     
     if url_type=='adoption':
@@ -88,16 +88,16 @@ def delete_post(request, type, pk):
     elif url_type =='missing':
         url= reverse('my_missing_post')
 
-    pet = get_object_or_404(pet_type, pk=pk)
+    post = get_object_or_404(post_type, pk=pk)
 
-    if pet.user_id != request.user.username:
+    if post.user_id != request.user.username:
         return redirect(url)
 
     if request.method == 'POST':
-        pet.delete()
+        post.delete()
         return redirect(url)
         
-    context = {'pet': pet ,'url_go_to':url}
+    context = {'pet': post ,'url_go_to':url}
     return render(request, 'delete_post.html', context)
 
 def pet_detail(request,type,pk):
@@ -183,6 +183,44 @@ def update_missing_post(request,pk):
 def view_all_missing_post(request):
     pets = MissingPost.objects.filter(pet_still_missing= True)
     return render(request, 'view_all_missing_post.html', {'pets': pets})
+
+
+@login_required
+def make_adoption_request(request,pk):
+
+    email = request.user.username
+    creator = CustomUser.objects.get(email=email)
+    pet=AdoptionPost.objects.get(pk=pk)
+    posted_by=pet.user_id
+
+    if request.method == 'POST':
+        reason = request.POST['reason']
+        mobile = request.POST['mobile']
+        requester_email = request.POST['requester_email']
+        had_pet = request.POST['had_pet']
+        can_pick_up = request.POST['can_pick_up']
+
+        
+        adoption_request= AdoptionRequest(
+            requested_by=creator,
+            pet=pet,
+            posted_by=posted_by,
+            reason=reason,
+            mobile=mobile,
+            email=requester_email,
+            had_pet=had_pet,
+            can_pick_up=can_pick_up,
+            approved=False)
+        print(adoption_request)
+        
+        adoption_request.save()
+            
+        return HttpResponse("Successfully requested!")
+    
+    context={'pet':pet}
+    
+    return render(request, 'make_adoption_request.html',context)
+
 
 
 

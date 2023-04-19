@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Pending Adoption Request</title>
+</head>
+<body>
+	<h1>Pending Adoption Request</h1>
+
+	{% if requests %}
+		<ul>
+		{% for request in requests %}
+			<li>Pet name :{{ request.pet_id.pet_name }} - posted by: {{ request.posted_by }} -requested by: - {{ request.requested_by_id }}</li>
+		{% endfor %}
+		</ul>
+	{% else %}
+	    <p>No adoption request at this time.</p>
+	{% endif %}
+</body>
+</html>
