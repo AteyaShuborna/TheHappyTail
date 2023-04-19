@@ -27,6 +27,7 @@ def create_adoption_post(request):
         email = request.user.username
         creator = CustomUser.objects.get(email=email)
 
+        
         pet_for_adoption= AdoptionPost(
             pet_type=pet_type,
             pet_name=pet_name,

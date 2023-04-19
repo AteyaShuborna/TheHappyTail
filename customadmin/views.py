@@ -18,7 +18,6 @@ def admin_login(request):
             password = request.POST.get('password')
             user_obj= User.objects.filter(username=username)
             if not user_obj.exists():
-                messages.info(request,'Account not found')
                 return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
             
             user_obj=authenticate(username=username,password=password)
@@ -26,9 +25,8 @@ def admin_login(request):
             if user_obj and user_obj.is_staff:
                 login(request,user_obj)
                 return redirect('admin_dashboard')
-            
-            messages.info(request,'Invalid Password')
-            return redirect('/')
+            else:
+                return redirect('/')
         
         return render(request,'admin_login.html')
     
@@ -58,7 +56,7 @@ def view_all_adoption_request(request):
 
 @staff_member_required(login_url = reverse_lazy('admin_login'))
 def approve_adoption_request(request,pk):
-    user_request=AdoptionRequest.objects.filter(pk=pk)
-    user_request.approved=True
-    user_request.save()
-    return HttpResponse("Approved")
+    adoption_request = AdoptionRequest.objects.get(id=pk)
+    adoption_request.approved = True
+    adoption_request.save()
+    return HttpResponse("approved")
