@@ -171,7 +171,7 @@ def create_missing_post(request):
         
         pet_missing.save()
         
-        return HttpResponse("Successfully posted!")
+        return redirect(f"/post/missing/{pet_missing.id}/")
     else:
         return render(request, 'create_missing_post.html')
     

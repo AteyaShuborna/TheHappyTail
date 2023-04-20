@@ -16,7 +16,10 @@ def register(request):
 
         if CustomUser.objects.filter(email=email).exists():
             messages.info(request, 'email already exists!')
-            return redirect('register.html')
+            return redirect('register')
+        if len(password)<6:
+            messages.info(request, 'password must be of length 6 at least')
+            return redirect('register')
         else:
             user = CustomUser(name=name, address=address, email=email)
             user.save()

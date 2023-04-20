@@ -44,7 +44,14 @@
             <a href="{% url 'view_all_adoption_post' %}" class="nav-item nav-link">Adopt</a>
             <a href="{% url 'view_all_missing_post' %}" class="nav-item nav-link">Missing Pets</a>
             {% if user.is_authenticated %}
-            <a href="{% url 'logout' %}" class="nav-item nav-link">Logout</a>
+            <div class="nav-item dropdown">
+                <a href="#" class="nav-item nav-link dropdown-toggle" data-bs-toggle="dropdown">User</a>
+                <div class="dropdown-menu m-0">
+                    <a href="{% url 'my_missing_post' %}" class="dropdown-item">My Missing Posts</a>
+                    <a href="{% url 'my_adoption_post' %}" class="dropdown-item">My Adoption Posts</a>
+                    <a href="{% url 'logout' %}" class="dropdown-item">Logout</a>
+                </div>
+            </div>
             {% else %}
             <a href="{% url 'login' %}" class="nav-item nav-link">Login</a>
             <a href="{% url 'register' %}" class="nav-item nav-link">Register</a>
