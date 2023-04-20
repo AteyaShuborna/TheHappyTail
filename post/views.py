@@ -65,7 +65,20 @@ def update_adoption_post(request,pk):
         return redirect('my_adoption_post')
 
     if request.method == 'POST':
+        adoptionpet.pet_type = request.POST['pet_type']
         adoptionpet.pet_name = request.POST['pet_name']
+        adoptionpet.pet_breed = request.POST['pet_breed']
+        adoptionpet.pet_description = request.POST['pet_description']
+        adoptionpet.pet_image = request.FILES.get('pet_image')
+        adoptionpet.pet_colour = request.POST['pet_colour']
+        adoptionpet.pet_gender = request.POST['pet_gender']
+        adoptionpet.pet_location = request.POST['pet_location']
+        adoptionpet.pet_mobile = request.POST['pet_mobile']
+        adoptionpet.pet_behaviour = request.POST['pet_behaviour']
+        adoptionpet.pet_food = request.POST['pet_food']
+        adoptionpet.pet_physicalcondition = request.POST['pet_physicalcondition']
+        adoptionpet.pet_availability = request.POST['pet_availability']
+        adoptionpet.pet_vaccinated = request.POST['pet_vaccinated']
         adoptionpet.pet_age = request.POST['pet_age']
         adoptionpet.save()
 
@@ -75,7 +88,7 @@ def update_adoption_post(request,pk):
 
     context = {'pet': adoptionpet, 'creator_name': creator_name}
       
-    return render(request, 'update_adoption_post.html', context)
+    return render(request, 'create_adoption_post.html', context)
 
 @login_required
 def delete_post(request, type, pk):
@@ -170,8 +183,21 @@ def update_missing_post(request,pk):
         return redirect('my_missing_post')
 
     if request.method == 'POST':
+        missingpet.pet_type = request.POST['pet_type']
         missingpet.pet_name = request.POST['pet_name']
+        missingpet.pet_breed = request.POST['pet_breed']
+        missingpet.pet_description = request.POST['pet_description']
+        missingpet.pet_image = request.FILES.get('pet_image')
+        missingpet.pet_colour = request.POST['pet_colour']
+        missingpet.pet_gender = request.POST['pet_gender']
+        missingpet.pet_location = request.POST['pet_location']
+        missingpet.pet_mobile = request.POST['pet_mobile']
+        missingpet.pet_accessories = request.POST['pet_accessories']
+        missingpet.pet_datemissing = request.POST['pet_datemissing']
+        missingpet.pet_vaccinated = request.POST['pet_vaccinated']
         missingpet.pet_age = request.POST['pet_age']
+        missingpet.pet_rewards=request.POST['pet_rewards']
+        missingpet.pet_last_seen_location=request.POST['pet_last_seen_location']
         missingpet.save()
 
         return redirect('my_missing_post')
@@ -180,7 +206,7 @@ def update_missing_post(request,pk):
 
     context = {'pet': missingpet, 'creator_name': creator_name}
       
-    return render(request, 'update_missing_post.html', context)
+    return render(request, 'create_missing_post.html', context)
 
 def view_all_missing_post(request):
     pets = MissingPost.objects.filter(pet_still_missing= True)
