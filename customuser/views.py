@@ -12,3 +12,5 @@ def user_adoption_post(request):
 def user_missing_post(request):
     user_all_missing_post = MissingPost.objects.filter(user_id=request.user.username)
     return render(request, 'user_all_missing_post.html', {'user_all_missing_post': user_all_missing_post})
+
+
