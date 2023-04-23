@@ -52,18 +52,20 @@
                     <a href="{% url 'logout' %}" class="dropdown-item">Logout</a>
                 </div>
             </div>
-            {% else %}
-            <a href="{% url 'login' %}" class="nav-item nav-link">Login</a>
-            <a href="{% url 'register' %}" class="nav-item nav-link">Register</a>
-            {% endif %}
             <div class="nav-item dropdown">
-                <a href="#" class="nav-item nav-link nav-contact bg-primary text-white px-5 ms-lg-5 dropdown-toggle" data-bs-toggle="dropdown">Post</a>
+                <a href="#" class="nav-item nav-link nav-contact bg-primary text-white px-5 ms-lg-5 dropdown-toggle" data-bs-toggle="dropdown"> Create Post</a>
                 <div class="dropdown-menu m-0">
-                    <a href="{% url 'create_missing_post' %}" class="dropdown-item">Missing Pet</a>
-                    <a href="{% url 'create_adoption_post' %}" class="dropdown-item">Adoption Post</a>
+                    <a href="{% url 'create_missing_post' %}" class="dropdown-item">Create Missing post</a>
+                    <a href="{% url 'create_adoption_post' %}" class="dropdown-item">Rehome your pet</a>
                 </div>
             </div>
-            {% endif %}
+            {% else %}
+            <a href="{% url 'login' %}" class="nav-item nav-link">Login</a>
+            <a href="{% url 'register' %}" class="nav-item nav-link nav-contact bg-primary text-white px-5 ms-lg-5 dropdown-toggle" data-bs-toggle="dropdown"> Register</a>
+            
         </div>
+        {% endif %}
+    {% endif %}
+            
     </div>
 </nav>
