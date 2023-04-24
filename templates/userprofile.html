@@ -79,7 +79,7 @@
 
           <h4>Adoption Requests</h4>
           {% for req in adoptionreq %}
-          <h5><li><a href="view_adoption_request pk=req.id " class="link-info">{{req.pet_name}}</a></li></h5>
+          <h5><li><a href="{% url 'view_adoption_request' pk=req.id %} " class="link-info">{{req.pet_name}}</a></li></h5>
           {% endfor %}
 
           <h4>Adoption Posts</h4>

@@ -47,6 +47,7 @@
             <div class="nav-item dropdown">
                 <a href="#" class="nav-item nav-link dropdown-toggle" data-bs-toggle="dropdown">User</a>
                 <div class="dropdown-menu m-0">
+                    <a href="{% url 'userprofile' pk=request.user.id %}" class="dropdown-item">My profile</a>
                     <a href="{% url 'notifications' %}" class="dropdown-item">My Notification</a>
                     <a href="{% url 'my_missing_post' %}" class="dropdown-item">My Missing Posts</a>
                     <a href="{% url 'my_adoption_post' %}" class="dropdown-item">My Adoption Posts</a>

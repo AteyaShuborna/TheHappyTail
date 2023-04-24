@@ -5,9 +5,6 @@ from django.contrib.auth import authenticate
 from django.contrib.auth import login
 from django.contrib.auth import logout
 from customuser.models import CustomUser
-from django.conf import settings
-from django.core.mail import send_mail
-import uuid
 
 
 def register(request):

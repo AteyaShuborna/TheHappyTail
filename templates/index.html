@@ -2,7 +2,7 @@
 <html lang="en">
 {% load static %}
 
-<body>
+<br>
     <!-- Navbar Start -->
     {% include 'navbar.html' %}
     <!-- Navbar End -->
@@ -31,8 +31,9 @@
     <!-- Hero End -->
 
     <h2 class="text-center">Missing Pets</h2>
+    {% if missing_pets %}
     <div class="owl-carousel product-carousel">
-        {% if missing_pets %}
+        
             {% for pet in missing_pets %}
             <div class="pb-5">
                 <div class="product-item position-relative bg-light d-flex flex-column text-center">
@@ -49,20 +50,21 @@
                 </div>
             </div>
             {% endfor %}
-        {% else %}
-            <h5 class="text-center">No pets are missing at this time.</h5>
-        {% endif %}
     </div>
+    {% else %}
+</br>
+    <h5 class="text-center">No pets are missing at this time.</h5>
+{% endif %}
 
     <h2 class="text-center">Pet for Adoption</h2>
+    {% if adoption_pets %}
     <div class="owl-carousel product-carousel">
-        {% if adoption_pets %}
             {% for pet in adoption_pets %}
             <div class="pb-5">
                 <div class="product-item position-relative bg-light d-flex flex-column text-center">
                     <img class="img-fluid mb-4" src="/{{  pet.pet_image }}" alt="">
                     <h6 class="text-uppercase">{{ pet.pet_name }} - {{ pet.pet_breed }}</h6>
-                    <h5 class="text-primary mb-0">Get me home!</h5>
+                    <h5 class="text-primary mb-0">Adopt me!</h5>
                     <!-- <div class="btn-action d-flex justify-content-center">
                         {% if user.is_authenticated %}
                         <a class="btn btn-primary py-2 px-3" href="{% url 'make_adoption_request' pk=pet.pk %}"><i class="bi-basket"></i></a>
@@ -73,10 +75,11 @@
                 </div>
             </div>
             {% endfor %}
-        {% else %}
-            <h5 class="text-center">No pets are missing at this time.</h5>
-        {% endif %}
     </div>
+    {% else %}
+</br>
+            <h5 class="text-center">No pets are available for adoption.</h5>
+        {% endif %}
 
     
     <!-- Footer Start -->

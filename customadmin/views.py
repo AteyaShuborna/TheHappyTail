@@ -108,7 +108,8 @@ def admin_view_userprofile(request,pk):
 @staff_member_required(login_url = reverse_lazy('admin_login'))
 def delete_userprofile(request,pk):
     c_user=User.objects.get(pk=pk)
-    c_user.delete()
+    customuser=CustomUser.objects.get(email=c_user.username)
+    customuser.delete()
     
     return redirect("all_users")
  
