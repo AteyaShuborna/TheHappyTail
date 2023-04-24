@@ -3,24 +3,36 @@
 	{% include 'navbar.html' %}
 	{% load static %}
 <body><br/>
+	<style>
+		.card {
+		  max-width: 300px;
+		  max-height: 300px;
+		}
+		.card img {
+    max-width: 300px;
+    height: 200px;
+  }
+	</style>
 	<div class="container-fluid py-5">
 		<div class="container">
 			<div class="border-start border-5 border-primary ps-5 mb-5" style="max-width: 600px;">
 				<h6 class="text-primary text-uppercase">Available for Adoption</h6>
+				{% if  request.user.is_staff %}
+				{% else %}
 				<h1 class="display-5 text-uppercase mb-0">Choose your next best friend</h1>
+				{% endif %}
 			</div>
-			<div class="owl-carousel product-carousel">
+			<div class="row row-cols-1 row-cols-md-3 g-4">
 				{% if pets %}
 					{% for pet in pets %}
-					<div class="pb-5">
-						<div class="product-item position-relative bg-light d-flex flex-column text-center">
-							<img class="img-fluid mb-4" src="/{{  pet.pet_image }}" alt="">
-							<h6 class="text-uppercase">{{ pet.pet_name }} - {{ pet.pet_breed }}</h6>
-							<h5 class="text-primary mb-0">Adopt Me</h5>
-							<div class="btn-action d-flex justify-content-center">
-								<a class="btn btn-primary py-2 px-3" href="{% url 'pet_detail' type='adoption' pk=pet.pk %}"><i class="bi-basket"></i></a>
-								
+					<div class="col">
+						<div class="card">
+							<div class="card-body">
+								<img class="img-fluid mb-4" src="/{{  pet.pet_image }}" alt="">
+								<h5 class="card-text">{{ pet.pet_name }} - {{ pet.pet_breed }}</h5>
+								<a href="{% url 'pet_detail' type='adoption' pk=pet.pk %}" class="btn btn-primary">Adopt Me</a>
 							</div>
+
 						</div>
 					</div>
 					{% endfor %}
@@ -28,6 +40,7 @@
 					<h5 class="text-center">No pets are available for adoption at this time.</h5>
 				{% endif %}
 			</div>
+			
 		</div>
 	</div>
 	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>

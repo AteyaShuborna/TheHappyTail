@@ -48,7 +48,7 @@ class MissingPost(Post):
     pet_still_missing = models.BooleanField(default=True)
 
     def __str__(self):
-        return f"{self.pet_name} ({self.pet_type}) - Last seen at {self.last_seen_location}"
+        return f"{self.pet_name} ({self.pet_type}) - Last seen at {self.pet_last_seen_location}"
     
 
 class AdoptionRequest(models.Model):

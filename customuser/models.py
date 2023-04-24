@@ -8,8 +8,14 @@ class CustomUser(models.Model):
     email = models.EmailField(primary_key=True, unique=True, default='')
     address = models.CharField(max_length=255, blank=True, null=True)
     
+    
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
     def __str__(self):
         return self.name
+    
+class Notification(models.Model):
+    recipient = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
+    message = models.CharField(max_length=255)
+    timestamp = models.DateTimeField(auto_now_add=True)

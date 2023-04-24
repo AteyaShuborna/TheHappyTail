@@ -3,32 +3,38 @@
 	{% include 'navbar.html' %}
     {% load static %}
 <body><br/>
+	<style>
+		.card {
+		  max-width: 300px;
+		  max-height: 300px;
+		}
+		.card img {
+    max-width: 300px;
+    height: 200px;
+  }
+  </style>
 <div class="container-fluid py-5">
 		<div class="container">
 			<div class="border-start border-5 border-primary ps-5 mb-5" style="max-width: 600px;">
 				<h6 class="text-primary text-uppercase">Missing Pets</h6>
 				<h1 class="display-5 text-uppercase mb-0">List of all missing pets</h1>
 			</div>
-			<div class="owl-carousel product-carousel">
+			<div class="row row-cols-1 row-cols-md-3 g-4">
 				{% if pets %}
 					{% for pet in pets %}
-					<div class="pb-5">
-						<div class="product-item position-relative bg-light d-flex flex-column text-center">
-							<img class="img-fluid mb-4" src="/{{  pet.pet_image }}" alt="">
-							<h6 class="text-uppercase">{{ pet.pet_name }} - {{ pet.pet_breed }}</h6>
-							<h5 class="text-primary mb-0">Get me home!</h5>
-							<!-- <div class="btn-action d-flex justify-content-center">
-								{% if user.is_authenticated %}
-								<a class="btn btn-primary py-2 px-3" href="{% url 'make_adoption_request' pk=pet.pk %}"><i class="bi-basket"></i></a>
-								{% else %}
-								<a class="btn btn-primary py-2 px-3" href="{% url 'login' %}"><i class="bi-basket"></i></a>
-								{% endif %}
-							</div> -->
+					<div class="col">
+						<div class="card">
+							<div class="card-body">
+								<img class="img-fluid mb-4" src="/{{  pet.pet_image }}" alt="">
+								<h5 class="card-text">{{ pet.pet_name }} - {{ pet.pet_last_seen_location }}</h5>
+								<a href="{% url 'pet_detail' type='missing' pk=pet.pk %}" class="btn btn-primary">Help me!!</a>
+							</div>
+
 						</div>
 					</div>
 					{% endfor %}
 				{% else %}
-					<h5 class="text-center">No pets are missing at this time.</h5>
+					<h5 class="text-center">No Missing posts.</h5>
 				{% endif %}
 			</div>
 		</div>

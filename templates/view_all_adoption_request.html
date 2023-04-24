@@ -31,6 +31,9 @@
               <td>
 					<a href="{% url 'approve_adoption_request' pk=request.pk %}" ><button type="submit" class="btn btn-outline-success">Approve</button> </a>
 				</td>
+        <td>
+					<a href="{% url 'view_adoption_request' pk=request.pk %}" ><button type="submit" class="btn btn-outline-success">View</button> </a>
+				</td>
             </tr>
             {% endfor %}
           </tbody>

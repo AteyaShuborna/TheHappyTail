@@ -34,7 +34,7 @@
     <div class="collapse navbar-collapse" id="navbarCollapse">
         <div class="navbar-nav ms-auto py-0">
 
-            {% if user.is_staff and user.is_authenticated %}
+            {% if request.user.is_staff and request.user.is_authenticated %}
             <a href="{% url 'admin_dashboard' %}" class="nav-item nav-link">Dashboard</a>
             <a href="{% url 'all_adoption_request' %}" class="nav-item nav-link">Adoption Requests</a>
             <a href="{% url 'admin_logout' %}" class="nav-item nav-link nav-contact bg-primary text-white px-5 ms-lg-5">Logout<i class="bi bi-arrow-right"></i></a>
@@ -43,17 +43,18 @@
             <a href="{% url 'index' %}" class="nav-item nav-link active">Home</a>
             <a href="{% url 'view_all_adoption_post' %}" class="nav-item nav-link">Adopt</a>
             <a href="{% url 'view_all_missing_post' %}" class="nav-item nav-link">Missing Pets</a>
-            {% if user.is_authenticated %}
+            {% if request.user.is_authenticated %}
             <div class="nav-item dropdown">
                 <a href="#" class="nav-item nav-link dropdown-toggle" data-bs-toggle="dropdown">User</a>
                 <div class="dropdown-menu m-0">
+                    <a href="{% url 'notifications' %}" class="dropdown-item">My Notification</a>
                     <a href="{% url 'my_missing_post' %}" class="dropdown-item">My Missing Posts</a>
                     <a href="{% url 'my_adoption_post' %}" class="dropdown-item">My Adoption Posts</a>
                     <a href="{% url 'logout' %}" class="dropdown-item">Logout</a>
                 </div>
             </div>
             <div class="nav-item dropdown">
-                <a href="#" class="nav-item nav-link nav-contact bg-primary text-white px-5 ms-lg-5 dropdown-toggle" data-bs-toggle="dropdown"> Create Post</a>
+                <a href="#" class="nav-item nav-link nav-contact bg-primary text-white px-5 ms-lg-5 dropdown-toggle" data-bs-toggle="dropdown" > Create Post</a>
                 <div class="dropdown-menu m-0">
                     <a href="{% url 'create_missing_post' %}" class="dropdown-item">Create Missing post</a>
                     <a href="{% url 'create_adoption_post' %}" class="dropdown-item">Rehome your pet</a>
@@ -61,7 +62,8 @@
             </div>
             {% else %}
             <a href="{% url 'login' %}" class="nav-item nav-link">Login</a>
-            <a href="{% url 'register' %}" class="nav-item nav-link nav-contact bg-primary text-white px-5 ms-lg-5 dropdown-toggle" data-bs-toggle="dropdown"> Register</a>
+            <a href="{% url 'register' %}" class="nav-item nav-link nav-contact bg-primary text-white px-5 ms-lg-5">Register<i class="bi bi-arrow-right"></i></a>
+            
             
         </div>
         {% endif %}

@@ -121,10 +121,14 @@ def pet_detail(request,type,pk):
         return render(request, '404.html', status=404)
     
     pet = get_object_or_404(pet_type, pk=pk)
-    creator_name = pet.user.name
+    creator_name = pet.user.email
 
     context = {'pet': pet, 'creator_name': creator_name}
-    return render(request, 'pet_detail.html', context)
+    if type=='adoption' :
+        return render(request, 'adoption_pet_detail.html', context)
+    else:
+        return render(request, 'missing_pet_detail.html', context)
+
 
 
 #===================================== pet missing ===============================================================#
