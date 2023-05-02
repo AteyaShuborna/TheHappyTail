@@ -9,7 +9,6 @@ from post.models import AdoptionRequest,Missinginfo,AdoptionPost
 from customuser.models import Notification,CustomUser
 from django.utils import timezone
 
-
 # Create your views here.
 def admin_login(request):
     try:
@@ -74,13 +73,6 @@ def approve_adoption_request(request,pk):
 
     return redirect('all_adoption_request')
 
-@staff_member_required(login_url = reverse_lazy('admin_login'))
-def view_adoption_request(request,pk):
-    request_datails = AdoptionRequest.objects.get(id=pk)
-    pet=AdoptionPost.objects.get(id=request_datails.pet_id)
-    context={'request_details':request_datails,'pet':pet}
-    
-    return render(request, 'adoption_request.html', context)
 
 
 @staff_member_required(login_url = reverse_lazy('admin_login'))
@@ -89,6 +81,7 @@ def view_all_users(request):
     for user in all_users:
         user_name = CustomUser.objects.get(email=user.username).name
         user.name=user_name
+        print(user.name)
     context = {'all_users': all_users}
     
     return render(request, 'all_users.html', context)
@@ -110,6 +103,7 @@ def delete_userprofile(request,pk):
     c_user=User.objects.get(pk=pk)
     customuser=CustomUser.objects.get(email=c_user.username)
     customuser.delete()
+    c_user.delete()
     
     return redirect("all_users")
  

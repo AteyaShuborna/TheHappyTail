@@ -88,7 +88,9 @@
           </ul>
           <hr>
           <p><strong>Reason:</strong> {{request_details.reason}} </p>
+          {% if request.user.is_staff %}
 					<a  href="{% url 'approve_adoption_request' pk=pet.pk %}"> <button type="submit" class="btn btn-adopt mt-3">Approve</button> </a>
+          {% endif %}
 					
         </div>
       </div>

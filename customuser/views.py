@@ -37,4 +37,12 @@ def userprofile(request,pk):
             req.pet_name = pet_name
         context={'c_user':c_user,'customuser':customuser,'adoptionpost':adoptionpost,'adoptionreq':adoptionreq}
         return render(request, 'userprofile.html', context)
-
+    
+@login_required
+def view_adoption_request(request,pk):
+    request_datails = AdoptionRequest.objects.get(id=pk)
+    pet=AdoptionPost.objects.get(id=request_datails.pet_id)
+    
+    context={'request_details':request_datails,'pet':pet}
+        
+    return render(request, 'adoption_request.html', context)
