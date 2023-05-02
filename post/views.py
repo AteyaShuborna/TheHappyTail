@@ -59,36 +59,29 @@ def view_all_adoption_post(request):
     return render(request, 'view_all_adoption_post.html', context)
 
 @login_required
-def update_adoption_post(request,pk):
+def update_adoption_post(request, pk):
     adoptionpet = get_object_or_404(AdoptionPost, pk=pk)
     if adoptionpet.user_id != request.user.username:
         return redirect('my_adoption_post')
 
     if request.method == 'POST':
-        adoptionpet.pet_type = request.POST['pet_type']
-        adoptionpet.pet_name = request.POST['pet_name']
-        adoptionpet.pet_breed = request.POST['pet_breed']
-        adoptionpet.pet_description = request.POST['pet_description']
-        adoptionpet.pet_image = request.FILES.get('pet_image')
-        adoptionpet.pet_colour = request.POST['pet_colour']
-        adoptionpet.pet_gender = request.POST['pet_gender']
-        adoptionpet.pet_location = request.POST['pet_location']
-        adoptionpet.pet_mobile = request.POST['pet_mobile']
-        adoptionpet.pet_behaviour = request.POST['pet_behaviour']
-        adoptionpet.pet_food = request.POST['pet_food']
-        adoptionpet.pet_physicalcondition = request.POST['pet_physicalcondition']
-        adoptionpet.pet_availability = request.POST['pet_availability']
-        adoptionpet.pet_vaccinated = request.POST['pet_vaccinated']
-        adoptionpet.pet_age = request.POST['pet_age']
+        fields_to_update = ['pet_type', 'pet_name', 'pet_breed', 'pet_description', 'pet_colour', 'pet_gender', 'pet_location', 'pet_mobile', 'pet_behaviour', 'pet_food', 'pet_physicalcondition', 'pet_availability', 'pet_vaccinated', 'pet_age']
+        for field in fields_to_update:
+            if field in request.POST:
+                setattr(adoptionpet, field, request.POST[field])
+
+        if 'pet_image' in request.FILES:
+            adoptionpet.pet_image = request.FILES['pet_image']
+
         adoptionpet.save()
 
         return redirect(f"/post/adoption/{adoptionpet.id}/")
     
     creator_name = adoptionpet.user.name
-
     context = {'pet': adoptionpet, 'creator_name': creator_name}
       
     return render(request, 'create_adoption_post.html', context)
+
 
 @login_required
 def delete_post(request, type, pk):

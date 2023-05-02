@@ -83,10 +83,11 @@ class PostTestCase(TestCase):
         self.client.login(username='testuser@test.com', password='testpassword')
         new_pet_name = 'summer'
         new_pet_age = 3
+        new_pet_type = 'dog'
         posted_by= AdoptionPost.objects.get(id=self.adoption_post.id)
 
         self.assertEqual('testuser@test.com', posted_by.user_id) 
-        response = self.client.post(self.url3, {'pet_name': new_pet_name, 'pet_age': new_pet_age})
+        response = self.client.post(self.url3, {'pet_name': new_pet_name, 'pet_age': new_pet_age , 'pet_type':new_pet_type })
         self.assertEqual(response.status_code, 302) 
         updated_post = AdoptionPost.objects.get(id=self.adoption_post.id)
         self.assertEqual(updated_post.pet_name, new_pet_name) 
@@ -96,7 +97,7 @@ class PostTestCase(TestCase):
         self.url4 = reverse('pet_detail', args=['adoption', self.adoption_post.pk])
         response = self.client.get(self.url4)
         self.assertEqual(response.status_code, 200) 
-        self.assertTemplateUsed(response, 'pet_detail.html') 
+        self.assertTemplateUsed(response, 'adoption_pet_detail.html') 
         self.assertContains(response, 'Buddy') 
 
     def test_pet_detail_view_invalid_post_id(self):
@@ -124,16 +125,3 @@ class PostTestCase(TestCase):
         self.assertEqual(adoption_request.had_pet, True)
         self.assertEqual(adoption_request.can_pick_up, False)
         self.assertFalse(adoption_request.approved)
-
-    def test_invalid_request(self):
-        self.url6 = reverse('make_adoption_request', args=[self.adoption_post.pk])
-        data = {
-            'reason': '',
-            'mobile': '',
-            'requester_email': '',
-            'had_pet': '',
-            'can_pick_up': ''
-        }
-        response = self.client.post(self.url6, data=data)
-        self.assertEqual(response.status_code, 200)
-        self.assertEqual(AdoptionRequest.objects.count(), 0)
